@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, FlatList, ScrollView } from 'react-native';
 import AddingTaskBar from '../molecules/AddingTaskBar';
 import Task from '../atoms/Task';
 import ToDoModal from '../molecules/ToDoModal';
@@ -8,6 +8,7 @@ import AlertMsg from '../atoms/AlertMsg';
 const MainScreen = () => {
   const [tasks, setTasks] = useState<{ text: string; id: number }[]>([]);
   const [isModalVisible, setVisible] = useState<boolean>(false);
+  const [currentTask, setCurrentTask] = useState<{ text: string; id: number }>({ text: '', id: 0 });
 
   const addTask = (task: string) => {
     if (task === '') {
@@ -30,19 +31,29 @@ const MainScreen = () => {
   return (
     <View style={styles.mainScreen}>
       <AddingTaskBar addFunction={addTask} />
-      {tasks.map((task) => (
-        <View key={task.id}>
-          <Task onPress={() => removeTask(task.id)} onLongPress={() => setVisible(!isModalVisible)}>
-            {task.text}
-          </Task>
-          <ToDoModal
-            data={task}
-            visibility={isModalVisible}
-            editTask={editTask}
-            closeModal={() => setVisible(!isModalVisible)}
-          />
-        </View>
-      ))}
+      <FlatList
+        data={tasks}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({ item }) => (
+          <ScrollView>
+            <Task
+              onPress={() => removeTask(item.id)}
+              onLongPress={() => {
+                setCurrentTask({ text: item.text, id: item.id });
+                setVisible(!isModalVisible);
+              }}
+            >
+              {item.text}
+            </Task>
+          </ScrollView>
+        )}
+      />
+      <ToDoModal
+        data={currentTask}
+        visibility={isModalVisible}
+        editTask={editTask}
+        closeModal={() => setVisible(!isModalVisible)}
+      />
     </View>
   );
 };

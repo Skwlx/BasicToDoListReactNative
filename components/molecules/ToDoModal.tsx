@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { View, Modal, StyleSheet, TextInput } from 'react-native';
 import Header from '../atoms/Header';
 import ToDoButton from '../atoms/ToDoButton';
@@ -11,7 +11,8 @@ interface ToDoModalProps {
 }
 
 const ToDoModal: React.FC<ToDoModalProps> = ({ visibility, closeModal, data, editTask }) => {
-  const unEditedTask = useRef(data.text);
+  const [text, setText] = useState<string>('');
+
   return (
     <Modal visible={visibility}>
       <View style={styles.modalContentBox}>
@@ -19,17 +20,24 @@ const ToDoModal: React.FC<ToDoModalProps> = ({ visibility, closeModal, data, edi
         <TextInput
           style={styles.input}
           placeholder={data.text}
-          onChangeText={(text) => editTask(text, data.id)}
+          onChangeText={(text) => setText(text)}
         ></TextInput>
         <View style={styles.buttonsBox}>
           <ToDoButton
             title="cancel"
             behavior={() => {
-              editTask(unEditedTask.current, data.id);
+              setText('');
               closeModal();
             }}
           />
-          <ToDoButton title="Ok" behavior={() => closeModal()} />
+          <ToDoButton
+            title="Ok"
+            behavior={() => {
+              editTask(text, data.id);
+              setText('');
+              closeModal();
+            }}
+          />
         </View>
       </View>
     </Modal>

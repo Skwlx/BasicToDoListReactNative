@@ -4,13 +4,11 @@ import MainScreen from './components/organisms/MainScreen';
 
 export default function App() {
   return (
-    <ScrollView>
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style={styles.container}>
-          <MainScreen />
-        </View>
-      </TouchableWithoutFeedback>
-    </ScrollView>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View style={styles.container}>
+        <MainScreen />
+      </View>
+    </TouchableWithoutFeedback>
   );
 }
 
