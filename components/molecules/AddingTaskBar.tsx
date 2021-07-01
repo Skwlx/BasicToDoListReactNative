@@ -4,11 +4,11 @@ import Input from '../atoms/Input';
 import ToDoButton from '../atoms/ToDoButton';
 
 interface AddingTaskBarProps {
-  onClickFunction: (task: string) => void;
+  addFunction: (task: string) => void;
 }
 
-const AddingTaskBar: React.FC<AddingTaskBarProps> = ({ onClickFunction }) => {
-  const [task, setNewTask] = useState('');
+const AddingTaskBar: React.FC<AddingTaskBarProps> = ({ addFunction }) => {
+  const [task, setNewTask] = useState<string>('');
 
   const addTask = (task: string) => {
     setNewTask(task);
@@ -17,7 +17,7 @@ const AddingTaskBar: React.FC<AddingTaskBarProps> = ({ onClickFunction }) => {
   return (
     <View style={styles.barBox}>
       <Input changeFunction={addTask} />
-      <ToDoButton title="add" behavior={onClickFunction.bind(this, task)} />
+      <ToDoButton title="add" behavior={() => addFunction(task)} />
     </View>
   );
 };

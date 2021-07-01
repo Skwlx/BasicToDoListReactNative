@@ -11,7 +11,7 @@ interface ToDoButtonProps {
 const ToDoButton: React.FC<ToDoButtonProps> = ({ title, styles, color, behavior }) => {
   return (
     <View style={{ ...buttonStyles.button, ...styles }}>
-      <Button color={color} onPress={() => behavior()} title={title}></Button>
+      <Button color={color ? color : 'white'} onPress={() => behavior()} title={title}></Button>
     </View>
   );
 };
@@ -20,6 +20,8 @@ const buttonStyles = StyleSheet.create({
   button: {
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: 'blue',
+    borderRadius: 10,
   },
 });
 

@@ -29,7 +29,7 @@ const MainScreen = () => {
 
   return (
     <View style={styles.mainScreen}>
-      <AddingTaskBar onClickFunction={addTask} />
+      <AddingTaskBar addFunction={addTask} />
       {tasks.map((task) => (
         <View key={task.id}>
           <Task onPress={() => removeTask(task.id)} onLongPress={() => setVisible(!isModalVisible)}>

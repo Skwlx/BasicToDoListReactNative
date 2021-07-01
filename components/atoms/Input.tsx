@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, TextInput, StyleSheet } from 'react-native';
 
 interface InputProps {
@@ -12,6 +12,7 @@ const Input: React.FC<InputProps> = ({ changeFunction }) => {
         onChangeText={(text) => changeFunction(text)}
         style={styles.input}
         placeholder="Add task"
+        clearButtonMode="always"
       ></TextInput>
     </View>
   );
@@ -24,6 +25,8 @@ const styles = StyleSheet.create({
   },
   input: {
     textAlign: 'center',
+    fontSize: 20,
+    padding: 5,
   },
 });
 

@@ -14,7 +14,7 @@ const Task: React.FC<TaskProps> = ({ children, onPress, onLongPress }) => {
       onPress={() => onPress()}
       onLongPress={() => onLongPress()}
     >
-      <Text>{children}</Text>
+      <Text style={styles.taskText}>{children}</Text>
     </TouchableOpacity>
   );
 };
@@ -24,8 +24,12 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderColor: 'lightgray',
     padding: 10,
-    marginTop: 5,
+    marginTop: 10,
     marginBottom: 5,
+    borderRadius: 5,
+  },
+  taskText: {
+    fontSize: 20,
   },
 });
 
