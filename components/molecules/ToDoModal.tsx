@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, Modal, StyleSheet, TextInput } from 'react-native';
-import Input from '../atoms/Input';
 import ToDoButton from '../atoms/ToDoButton';
 
 interface ToDoModalProps {
@@ -11,7 +10,6 @@ interface ToDoModalProps {
 }
 
 const ToDoModal: React.FC<ToDoModalProps> = ({ visibility, closeModal, data, editTask }) => {
-  const [textValue, setTextValue] = useState(data.text);
   return (
     <Modal visible={visibility}>
       <View style={styles.modalContentBox}>

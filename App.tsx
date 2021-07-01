@@ -1,12 +1,14 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Keyboard, StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
 import MainScreen from './components/organisms/MainScreen';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <MainScreen />
-    </View>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View style={styles.container}>
+        <MainScreen />
+      </View>
+    </TouchableWithoutFeedback>
   );
 }
 

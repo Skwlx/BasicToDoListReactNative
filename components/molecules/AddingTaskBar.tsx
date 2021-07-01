@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Alert } from 'react-native';
 import Input from '../atoms/Input';
 import ToDoButton from '../atoms/ToDoButton';
 
@@ -13,6 +13,7 @@ const AddingTaskBar: React.FC<AddingTaskBarProps> = ({ onClickFunction }) => {
   const addTask = (task: string) => {
     setNewTask(task);
   };
+
   return (
     <View style={styles.barBox}>
       <Input changeFunction={addTask} />

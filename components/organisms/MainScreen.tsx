@@ -3,12 +3,18 @@ import { View, StyleSheet } from 'react-native';
 import AddingTaskBar from '../molecules/AddingTaskBar';
 import Task from '../atoms/Task';
 import ToDoModal from '../molecules/ToDoModal';
+import AlertMsg from '../atoms/AlertMsg';
 
 const MainScreen = () => {
   const [tasks, setTasks] = useState<{ text: string; id: number }[]>([]);
   const [isModalVisible, setVisible] = useState<boolean>(false);
+
   const addTask = (task: string) => {
-    setTasks((prevState) => [...prevState, { text: task, id: Math.random() }]);
+    if (task === '') {
+      AlertMsg('Error', 'Add some text to your task.');
+    } else {
+      setTasks((prevState) => [...prevState, { text: task, id: Math.random() }]);
+    }
   };
 
   const removeTask = (task: number) => {
@@ -20,6 +26,7 @@ const MainScreen = () => {
       prevState.map((el) => (el.id === id ? { text: taskText, id: id } : el))
     );
   };
+
   return (
     <View style={styles.mainScreen}>
       <AddingTaskBar onClickFunction={addTask} />
